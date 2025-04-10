@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://svfu46qgpv04"]
+
+[ext_resource type="PackedScene" uid="uid://h2sqwt4cw6ot" path="res://pile.tscn" id="1_mqvfg"]
+[ext_resource type="Script" uid="uid://bs1ah75mlnxnt" path="res://lateral_pile.gd" id="2_hlupk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlupk"]
+resource_local_to_scene = true
+size = Vector3(3, 14.7533, 4)
+
+[node name="DropZone" instance=ExtResource("1_mqvfg")]
+script = ExtResource("2_hlupk")
+GROWTH_DIRECTION = true
+
+[node name="DropZoneShape" parent="." index="0"]
+shape = SubResource("BoxShape3D_hlupk")

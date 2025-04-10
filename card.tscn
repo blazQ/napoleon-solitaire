@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://cd6t74xr21ld4"]
+
+[ext_resource type="Script" uid="uid://c3s6o8qlyxv5y" path="res://card.gd" id="1_kikvd"]
+[ext_resource type="Shader" uid="uid://bfqeju8fw5wuy" path="res://card.gdshader" id="2_rjlel"]
+[ext_resource type="Texture2D" uid="uid://d03q1ce60rlgj" path="res://Assets/Cards/cardBack_red2.png" id="3_e484p"]
+[ext_resource type="Texture2D" uid="uid://bhw6c34js8bbh" path="res://Assets/Cards/cardClubs5.png" id="4_fpac0"]
+[ext_resource type="AudioStream" uid="uid://d3mq1g3185sri" path="res://Assets/SFX/584212__ambiabstract__clack-clunk.wav" id="5_1i5pp"]
+[ext_resource type="AudioStream" uid="uid://b7414s0c7ydl4" path="res://Assets/SFX/522955__radiohummingbird__clack-2.wav" id="6_1i5pp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e484p"]
+resource_local_to_scene = true
+margin = 0.0
+size = Vector3(2, 0.02, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjlel"]
+render_priority = 1
+shader = ExtResource("2_rjlel")
+shader_parameter/front_texture = ExtResource("4_fpac0")
+shader_parameter/back_texture = ExtResource("3_e484p")
+shader_parameter/uv_scale = Vector2(-3, 2)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kikvd"]
+size = Vector3(2, 0.01, 3)
+
+[node name="Card" type="Area3D"]
+collision_mask = 4294967041
+script = ExtResource("1_kikvd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_e484p")
+
+[node name="Pivot" type="Node3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="CardMesh" type="MeshInstance3D" parent="CollisionShape3D/Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+material_override = SubResource("ShaderMaterial_rjlel")
+mesh = SubResource("BoxMesh_kikvd")
+skeleton = NodePath("../../..")
+
+[node name="PopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1i5pp")
+
+[node name="PushSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1i5pp")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
