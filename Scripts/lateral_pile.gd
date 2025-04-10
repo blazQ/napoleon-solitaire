@@ -1,4 +1,4 @@
-extends "res://pile.gd"
+extends "res://Scripts/pile.gd"
 
 const CARD_WIDTH: int = 2
 # True = RIGHT

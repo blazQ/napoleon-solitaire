@@ -1,7 +1,7 @@
 extends Node3D
 
-const CardScene = preload("res://Card.tscn")
-const CardConstants = preload("res://card_constants.gd")
+const CardScene = preload("res://Scenes/card.tscn")
+const CardConstants = preload("res://Scripts/card_constants.gd")
 
 var deck : Array
 

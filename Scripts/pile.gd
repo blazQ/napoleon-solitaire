@@ -1,6 +1,6 @@
 extends Area3D
 
-const CardConstants = preload("res://card_constants.gd")
+const CardConstants = preload("res://Scripts/card_constants.gd")
 
 @export var snap_point: Vector3
 @export var cards: Array

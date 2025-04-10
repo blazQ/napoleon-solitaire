@@ -127,35 +127,35 @@ initial_half_width = 0.5
 
 [node name="A1" parent="." groups=["piles"] instance=ExtResource("5_67vji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5899, 1.5, -9)
-GROWTH_DIRECTION = false
 snap_point = Vector3(0, 0, 0)
 cards = []
 pile_offset = 0.7
 initial_half_width = 0.5
+GROWTH_DIRECTION = false
 
 [node name="A2" parent="." groups=["piles"] instance=ExtResource("5_67vji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5899, 1.5, -3)
-GROWTH_DIRECTION = false
 snap_point = Vector3(0, 0, 0)
 cards = []
 pile_offset = 0.7
 initial_half_width = 0.5
+GROWTH_DIRECTION = false
 
 [node name="A3" parent="." groups=["piles"] instance=ExtResource("5_67vji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5899, 1.5, 3)
-GROWTH_DIRECTION = false
 snap_point = Vector3(0, 0, 0)
 cards = []
 pile_offset = 0.7
 initial_half_width = 0.5
+GROWTH_DIRECTION = false
 
 [node name="A4" parent="." groups=["piles"] instance=ExtResource("5_67vji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5899, 1.5, 9)
-GROWTH_DIRECTION = false
 snap_point = Vector3(0, 0, 0)
 cards = []
 pile_offset = 0.7
 initial_half_width = 0.5
+GROWTH_DIRECTION = false
 
 [node name="B1" parent="." groups=["piles"] instance=ExtResource("5_67vji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4101, 1.5, -9)

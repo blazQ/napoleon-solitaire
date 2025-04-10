@@ -10,6 +10,10 @@ size = Vector3(3, 14.7533, 4)
 [node name="DropZone" instance=ExtResource("1_mqvfg")]
 script = ExtResource("2_hlupk")
 GROWTH_DIRECTION = true
+snap_point = Vector3(0, 0, 0)
+cards = []
+pile_offset = 0.05
+initial_half_width = 0.5
 
 [node name="DropZoneShape" parent="." index="0"]
 shape = SubResource("BoxShape3D_hlupk")

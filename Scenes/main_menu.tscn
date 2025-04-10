@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bd6nc3xkpn53x"]
 
-[ext_resource type="Script" uid="uid://bu78dp7a4yuxa" path="res://Scripts/start_button.gd" id="1_7vrkn"]
-[ext_resource type="Script" uid="uid://07yrrv41pkbs" path="res://Scripts/exit_button.gd" id="2_fu7sn"]
+[ext_resource type="Script" uid="uid://bu78dp7a4yuxa" path="res://Scripts/start_button.gd" id="1_48xlc"]
+[ext_resource type="Script" uid="uid://07yrrv41pkbs" path="res://Scripts/exit_button.gd" id="2_1ehe0"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -37,12 +37,12 @@ theme_override_constants/separation = 13
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Start"
-script = ExtResource("1_7vrkn")
+script = ExtResource("1_48xlc")
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Exit"
-script = ExtResource("2_fu7sn")
+script = ExtResource("2_1ehe0")
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer/StartButton" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="VBoxContainer/ExitButton" method="_on_pressed"]

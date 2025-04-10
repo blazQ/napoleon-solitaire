@@ -11,6 +11,10 @@ collision_layer = 2
 input_ray_pickable = false
 priority = 1
 script = ExtResource("1_mw0at")
+snap_point = null
+cards = null
+pile_offset = null
+initial_half_width = null
 
 [node name="DropZoneShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, -0.000114169, 0.000249147, 0.00011419, 1, -5.35803e-05, -0.000249138, 5.36238e-05, 1, -0.003, 1.5, 0)

@@ -1,4 +1,4 @@
-extends "res://pile.gd"
+extends "res://Scripts/pile.gd"
 
 @export var suit: CardConstants.Suit
 
