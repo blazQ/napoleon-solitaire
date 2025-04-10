@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dawu648x4k7co"]
+
+[ext_resource type="Script" uid="uid://cth0jmt58hv11" path="res://card_manager.gd" id="1_jd0nb"]
+[ext_resource type="PackedScene" uid="uid://h2sqwt4cw6ot" path="res://drop_zone.tscn" id="2_v5i0k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxs2u"]
+albedo_color = Color(0.0739636, 0.246661, 0.0429552, 1)
+
+[node name="Table" type="Node3D"]
+script = ExtResource("1_jd0nb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.16066, 25.8907, 0.888088)
+projection = 1
+fov = 68.4
+size = 30.0
+
+[node name="TableBox" type="CSGBox3D" parent="."]
+size = Vector3(150, 1, 40)
+material = SubResource("StandardMaterial3D_nxs2u")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.463281, 0.390153, -0.795709, 0.196307, 0.92075, 0.337168, 0.864196, 0, -0.503156, -6.31388, 30.2579, -4.85658)
+light_energy = 2.435
+
+[node name="DropZone" parent="." groups=["drop_zones"] instance=ExtResource("2_v5i0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 4.5)
+
+[node name="DropZone2" parent="." groups=["drop_zones"] instance=ExtResource("2_v5i0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, -4.5)
+
+[node name="DropZone3" parent="." groups=["drop_zones"] instance=ExtResource("2_v5i0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 0)

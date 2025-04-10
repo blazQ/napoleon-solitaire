@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://h2sqwt4cw6ot"]
 
-[ext_resource type="Script" uid="uid://dklt5fo64s1m7" path="res://pile.gd" id="1_mw0at"]
+[ext_resource type="Script" uid="uid://dklt5fo64s1m7" path="res://Scripts/pile.gd" id="1_mw0at"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6gytn"]
 resource_local_to_scene = true

@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://dawu648x4k7co"]
 
-[ext_resource type="Script" uid="uid://cth0jmt58hv11" path="res://card_manager.gd" id="1_jd0nb"]
-[ext_resource type="PackedScene" uid="uid://h2sqwt4cw6ot" path="res://pile.tscn" id="2_v5i0k"]
-[ext_resource type="Script" uid="uid://xge5fhrks61k" path="res://elapsed_time_label.gd" id="3_bhh2s"]
-[ext_resource type="Script" uid="uid://burflh0rcnyyk" path="res://start_countdown.gd" id="3_jry6c"]
-[ext_resource type="PackedScene" uid="uid://h2tna386st2p" path="res://central_pile.tscn" id="4_vjl2i"]
-[ext_resource type="Script" uid="uid://b2425bp1ywkse" path="res://endpanel.gd" id="5_64sdq"]
-[ext_resource type="PackedScene" uid="uid://svfu46qgpv04" path="res://lateral_pile.tscn" id="5_67vji"]
-[ext_resource type="Script" uid="uid://bm1lk0x7l4ipu" path="res://move_count.gd" id="5_ormek"]
+[ext_resource type="Script" uid="uid://cth0jmt58hv11" path="res://Scripts/card_manager.gd" id="1_jd0nb"]
+[ext_resource type="PackedScene" uid="uid://h2sqwt4cw6ot" path="res://Scenes/pile.tscn" id="2_v5i0k"]
+[ext_resource type="Script" uid="uid://xge5fhrks61k" path="res://Scripts/elapsed_time_label.gd" id="3_bhh2s"]
+[ext_resource type="Script" uid="uid://burflh0rcnyyk" path="res://Scripts/start_countdown.gd" id="3_jry6c"]
+[ext_resource type="PackedScene" uid="uid://h2tna386st2p" path="res://Scenes/central_pile.tscn" id="4_vjl2i"]
+[ext_resource type="Script" uid="uid://b2425bp1ywkse" path="res://Scripts/endpanel.gd" id="5_64sdq"]
+[ext_resource type="PackedScene" uid="uid://svfu46qgpv04" path="res://Scenes/lateral_pile.tscn" id="5_67vji"]
+[ext_resource type="Script" uid="uid://bm1lk0x7l4ipu" path="res://Scripts/move_count.gd" id="5_ormek"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxs2u"]
 albedo_color = Color(0.0739636, 0.246661, 0.0429552, 1)
@@ -96,17 +96,34 @@ text = "Reset
 [node name="HeartsPile" parent="." groups=["piles", "special_piles"] instance=ExtResource("4_vjl2i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5899, 1.5, -9)
 suit = 3
+snap_point = null
+cards = null
+pile_offset = null
+initial_half_width = null
 
 [node name="DiamondsPile" parent="." groups=["piles", "special_piles"] instance=ExtResource("4_vjl2i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5899, 1.5, -3)
 suit = 2
+snap_point = null
+cards = null
+pile_offset = null
+initial_half_width = null
 
 [node name="ClubsPile" parent="." groups=["piles", "special_piles"] instance=ExtResource("4_vjl2i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5899, 1.5, 3)
+suit = null
+snap_point = null
+cards = null
+pile_offset = null
+initial_half_width = null
 
 [node name="SpadesPile" parent="." groups=["piles", "special_piles"] instance=ExtResource("4_vjl2i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5899, 1.5, 9)
 suit = 1
+snap_point = null
+cards = null
+pile_offset = null
+initial_half_width = null
 
 [node name="A1" parent="." groups=["piles"] instance=ExtResource("5_67vji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5899, 1.5, -9)
