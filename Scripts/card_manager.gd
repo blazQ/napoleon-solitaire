@@ -6,10 +6,19 @@ const CardConstants = preload("res://Scripts/card_constants.gd")
 var deck : Array
 var deck_node
 
+@export var start_time: float
+@export var game_started: bool = false
+@export var move_count: int = 0
+@export var elapsed_time: float
+
+
 var piles_filled : int = 0
 
 signal card_instanced(card)
 signal game_over()
+
+signal ui_update_time(elapsed_time)
+signal ui_update_move_count(move_count)
 
 # ------------------------------- Scene Instancing
 func _ready():
@@ -20,6 +29,11 @@ func _ready():
 	deck.shuffle()
 	place_deck()
 	place_aces()
+
+func _process(delta: float) -> void:
+	if game_started:
+		elapsed_time = Time.get_unix_time_from_system() - start_time
+		emit_signal("ui_update_time", elapsed_time)
 
 ## Instancing the deck and placing it in the deck pile
 func instance_deck():
@@ -40,6 +54,7 @@ func create_and_set_card(rank: CardConstants.Rank, suit: CardConstants.Suit, ini
 	card.set_card_textures()
 	card.card_popped.connect(_on_card_popped)
 	card.card_pushed.connect(_on_card_pushed)
+	card.move.connect(_on_move)
 	card.current_pile = initial_pile
 	return card 
 
@@ -73,7 +88,7 @@ func delete_deck_node():
 	deck_node.call_deferred("queue_free")
 
 func check_brick():
-	pass
+	return false
 
 # --------------------------------  Resource Handling
 
@@ -101,7 +116,6 @@ func _on_card_pushed(_pushed_card: Area3D, _pile: Area3D):
 			card.get_node("CollisionShape3D").disabled = true
 		elif card.is_pile_top and !card.is_finalized:
 			card.get_node("CollisionShape3D").disabled = false
-	check_brick()
 
 # Handling every time a card is popped from a drop zone by updating its collision shape so it's no longer selectable.
 # Popping a card from a drop zone implicitly means moving it to the player's hand.
@@ -136,12 +150,22 @@ func _on_game_start_timeout() -> void:
 	$Shuffle.play()
 	$InputBlocker.call_deferred("queue_free")
 	delete_deck_node()
+	start_time = Time.get_unix_time_from_system()
+	game_started = true
 	
 
 func _on_pile_filled():
 	piles_filled += 1
+	print(piles_filled)
 	if piles_filled == 4:
 		emit_signal("game_over")
 
+func _on_move():
+	if game_started:
+		move_count += 1
+		emit_signal("ui_update_move_count", move_count)
+		if check_brick():
+			pass # Send to game over scene, you've lost, game is bricked
+
 func _on_game_over():
-	pass
+	get_tree().change_scene_to_file("res://Scenes/win_scene.tscn")

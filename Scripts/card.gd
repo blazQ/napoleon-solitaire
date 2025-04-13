@@ -194,7 +194,3 @@ func drag_card():
 		var intersection = ray_plane_intersection(ray_origin, ray_direction, plane_point, Vector3.UP)
 		if intersection:
 			global_transform.origin = intersection
-
-
-func _on_start_pressed() -> void:
-	pass # Replace with function body.

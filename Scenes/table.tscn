@@ -123,9 +123,9 @@ grow_vertical = 2
 
 [node name="UI" parent="." instance=ExtResource("7_usajj")]
 
+[connection signal="game_over" from="." to="." method="_on_game_over"]
 [connection signal="game_over" from="." to="UI" method="_on_solitaire_game_over"]
 [connection signal="game_over" from="." to="UI/MenuPanel/ScoreTime/ElapsedTimeLabel" method="_on_solitaire_game_over"]
+[connection signal="ui_update_move_count" from="." to="UI" method="_on_solitaire_ui_update_move_count"]
+[connection signal="ui_update_time" from="." to="UI" method="_on_solitaire_ui_update_time"]
 [connection signal="timeout" from="GameStart" to="." method="_on_game_start_timeout"]
-[connection signal="timeout" from="GameStart" to="UI" method="_on_game_start_timeout"]
-[connection signal="timeout" from="GameStart" to="UI/MenuPanel/ScoreTime/ElapsedTimeLabel" method="_on_game_start_timeout"]
-[connection signal="timeout" from="GameStart" to="UI/MenuPanel/ScoreTime/MoveCount" method="_on_game_start_timeout"]

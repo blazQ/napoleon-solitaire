@@ -42,7 +42,7 @@ text = "00:00"
 [node name="MoveCount" type="Label" parent="MenuPanel/ScoreTime"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "Moves:"
+text = "Moves: 0"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuPanel/ScoreTime"]
 layout_mode = 2
