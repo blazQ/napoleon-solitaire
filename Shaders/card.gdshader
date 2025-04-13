@@ -14,7 +14,7 @@ void vertex() {
 void fragment() {
     vec2 uv_coords = UV;
     // Swap texture selection if needed
-    vec4 tex_color = FRONT_FACING ? texture(back_texture, uv_coords) : texture(front_texture, uv_coords);
+    vec4 tex_color = FRONT_FACING ? texture(front_texture, uv_coords) : texture(back_texture, uv_coords);
 
     ALBEDO = tex_color.rgb;
     ALPHA = tex_color.a;

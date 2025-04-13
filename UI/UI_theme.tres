@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c26v7ys8e032m"]
+
+[ext_resource type="FontFile" uid="uid://djaby0bgguafv" path="res://Assets/Fonts/Limelight-Regular.ttf" id="1_6w50i"]
+
+[resource]
+default_font = ExtResource("1_6w50i")
+default_font_size = 30

@@ -11,6 +11,7 @@ func _on_card_pushed(card: Area3D, drop_zone: Area3D):
 		cards.front().is_finalized = true
 		if cards.size() == 10:
 			emit_signal("pile_filled")
+			$FilledSound.play()
 			print("pile filled!")
 
 func is_move_allowed(card: Area3D) -> bool:

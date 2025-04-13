@@ -4,6 +4,7 @@ const CardScene = preload("res://Scenes/card.tscn")
 const CardConstants = preload("res://Scripts/card_constants.gd")
 
 var deck : Array
+var deck_node
 
 var piles_filled : int = 0
 
@@ -12,6 +13,7 @@ signal game_over()
 
 # ------------------------------- Scene Instancing
 func _ready():
+	deck_node = $Zones/Deck
 	for pile in get_tree().get_nodes_in_group("special_piles"):
 		pile.pile_filled.connect(_on_pile_filled)
 	instance_deck()
@@ -24,7 +26,7 @@ func instance_deck():
 	for suit in [CardConstants.Suit.CLUBS, CardConstants.Suit.DIAMONDS, CardConstants.Suit.HEARTS, CardConstants.Suit.SPADES]:
 		for rank in [CardConstants.Rank.TWO, CardConstants.Rank.THREE, CardConstants.Rank.FOUR, CardConstants.Rank.FIVE, 
 		CardConstants.Rank.SIX, CardConstants.Rank.SEVEN, CardConstants.Rank.JACK, CardConstants.Rank.QUEEN, CardConstants.Rank.KING]:
-			var card = create_and_set_card(rank, suit, $Deck)
+			var card = create_and_set_card(rank, suit, deck_node)
 			add_child(card)
 			deck.push_front(card)
 
@@ -53,18 +55,25 @@ func place_aces():
 ## Helper function to get the drop zone associated with every suit
 func get_suit_pile(suit: CardConstants.Suit):
 	if suit == CardConstants.Suit.CLUBS:
-		return $ClubsPile
+		return $Zones/ClubsPile
 	elif suit == CardConstants.Suit.SPADES:
-		return $SpadesPile
+		return $Zones/SpadesPile
 	elif suit == CardConstants.Suit.DIAMONDS:
-		return $DiamondsPile
+		return $Zones/DiamondsPile
 	elif suit == CardConstants.Suit.HEARTS:
-		return $HeartsPile
+		return $Zones/HeartsPile
 
 ## Helper function to place cards in the deck
 func place_deck():
 	for card in deck:
 		card.push_to_current_pile()
+		
+
+func delete_deck_node():
+	deck_node.call_deferred("queue_free")
+
+func check_brick():
+	pass
 
 # --------------------------------  Resource Handling
 
@@ -92,6 +101,7 @@ func _on_card_pushed(_pushed_card: Area3D, _pile: Area3D):
 			card.get_node("CollisionShape3D").disabled = true
 		elif card.is_pile_top and !card.is_finalized:
 			card.get_node("CollisionShape3D").disabled = false
+	check_brick()
 
 # Handling every time a card is popped from a drop zone by updating its collision shape so it's no longer selectable.
 # Popping a card from a drop zone implicitly means moving it to the player's hand.
@@ -104,14 +114,14 @@ func _on_card_popped(popped_card: Area3D, _pile: Area3D):
 func _on_game_start_timeout() -> void:
 	var card_index: int = 0
 	var piles = [
-		{"limit": 5,  "zone": $A1},
-		{"limit": 10, "zone": $A2},
-		{"limit": 15, "zone": $B1},
-		{"limit": 20, "zone": $B2},
-		{"limit": 24, "zone": $A3},
-		{"limit": 28, "zone": $A4},
-		{"limit": 32, "zone": $B3},
-		{"limit": 36, "zone": $B4},
+		{"limit": 5,  "zone": $Zones/A1},
+		{"limit": 10, "zone": $Zones/A2},
+		{"limit": 15, "zone": $Zones/B1},
+		{"limit": 20, "zone": $Zones/B2},
+		{"limit": 24, "zone": $Zones/A3},
+		{"limit": 28, "zone": $Zones/A4},
+		{"limit": 32, "zone": $Zones/B3},
+		{"limit": 36, "zone": $Zones/B4},
 	]
 
 	for i in range(deck.size()-1, -1, -1):
@@ -123,13 +133,15 @@ func _on_game_start_timeout() -> void:
 				break
 		deck[i].push_to_current_pile()
 		card_index += 1
-	$UI/StartPanel.call_deferred("queue_free")
+	$Shuffle.play()
+	$InputBlocker.call_deferred("queue_free")
+	delete_deck_node()
+	
 
 func _on_pile_filled():
 	piles_filled += 1
 	if piles_filled == 4:
 		emit_signal("game_over")
-		print("game over!")
 
-func _on_button_pressed() -> void:
-	get_tree().reload_current_scene()
+func _on_game_over():
+	pass

@@ -1,27 +1,36 @@
-[gd_scene load_steps=10 format=3 uid="uid://cd6t74xr21ld4"]
+[gd_scene load_steps=12 format=3 uid="uid://cd6t74xr21ld4"]
 
 [ext_resource type="Script" uid="uid://c3s6o8qlyxv5y" path="res://Scripts/card.gd" id="1_bnspj"]
-[ext_resource type="Shader" uid="uid://bfqeju8fw5wuy" path="res://Shaders/card.gdshader" id="2_xnv4g"]
+[ext_resource type="Texture2D" uid="uid://cs4j3jda5h4v1" path="res://Materials/front_material.tres" id="2_e6po8"]
 [ext_resource type="Texture2D" uid="uid://d03q1ce60rlgj" path="res://Assets/Cards/cardBack_red2.png" id="3_u5wvb"]
-[ext_resource type="Texture2D" uid="uid://bhw6c34js8bbh" path="res://Assets/Cards/cardClubs5.png" id="4_mm04k"]
-[ext_resource type="AudioStream" uid="uid://d3mq1g3185sri" path="res://Assets/SFX/584212__ambiabstract__clack-clunk.wav" id="5_yvxpl"]
-[ext_resource type="AudioStream" uid="uid://b7414s0c7ydl4" path="res://Assets/SFX/522955__radiohummingbird__clack-2.wav" id="6_uf1hq"]
+[ext_resource type="AudioStream" uid="uid://chf44lmhaomp0" path="res://Assets/Audio/drop_004.ogg" id="5_bnspj"]
+[ext_resource type="AudioStream" uid="uid://3qy418jt8yhd" path="res://Assets/Audio/click_003.ogg" id="5_xnv4g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e484p"]
 resource_local_to_scene = true
 margin = 0.0
 size = Vector3(2, 0.02, 3)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjlel"]
-render_priority = 1
-shader = ExtResource("2_xnv4g")
-shader_parameter/front_texture = ExtResource("4_mm04k")
-shader_parameter/back_texture = ExtResource("3_u5wvb")
-shader_parameter/uv_scale = Vector2(-3, 2)
-shader_parameter/uv_offset = Vector2(0, 0)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnspj"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.707
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("2_e6po8")
+uv1_scale = Vector3(-3, -2, -1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_kikvd"]
-size = Vector3(2, 0.01, 3)
+[sub_resource type="BoxMesh" id="BoxMesh_eumee"]
+size = Vector3(2, 0.05, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnv4g"]
+albedo_texture = ExtResource("3_u5wvb")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6po8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bnspj"]
+size = Vector3(2.002, 0.04, 3.002)
 
 [node name="Card" type="Area3D"]
 collision_mask = 4294967041
@@ -30,20 +39,29 @@ script = ExtResource("1_bnspj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_e484p")
 
-[node name="Pivot" type="Node3D" parent="CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+[node name="CardMeshFront" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999991, -0.00303881, 0.00298127, 0.00303552, 0.999995, 0.00110996, -0.00298462, -0.00110092, 0.999995, 0, 0.080002, 0)
+material_override = SubResource("StandardMaterial3D_bnspj")
+mesh = SubResource("BoxMesh_eumee")
+skeleton = NodePath("../..")
 
-[node name="CardMesh" type="MeshInstance3D" parent="CollisionShape3D/Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-material_override = SubResource("ShaderMaterial_rjlel")
-mesh = SubResource("BoxMesh_kikvd")
-skeleton = NodePath("../../..")
+[node name="CardMeshBack" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999991, -0.00303881, 0.00298127, 0.00303552, 0.999995, 0.00110996, -0.00298462, -0.00110092, 0.999995, 0, 0.0786262, 0)
+material_override = SubResource("StandardMaterial3D_xnv4g")
+mesh = SubResource("BoxMesh_eumee")
+skeleton = NodePath("../..")
+
+[node name="CardMeshBorder" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.999991, -0.00303881, 0.00298127, 0.00303552, 0.999995, 0.00110996, -0.00298462, -0.00110092, 0.999995, 0, 0.080002, 0)
+material_override = SubResource("StandardMaterial3D_e6po8")
+mesh = SubResource("BoxMesh_bnspj")
+skeleton = NodePath("../..")
 
 [node name="PopSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_yvxpl")
+stream = ExtResource("5_xnv4g")
 
 [node name="PushSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_uf1hq")
+stream = ExtResource("5_bnspj")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

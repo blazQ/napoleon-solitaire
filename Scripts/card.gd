@@ -15,6 +15,8 @@ const CardConstants = preload("res://Scripts/card_constants.gd")
 @export var is_draggable: bool = false
 @export var is_snapping: bool = false
 
+@export var outline_material: Material = preload("res://Materials/card_outline.tres")
+
 var drag_plane_y: float = 0.0
 
 var current_pile: Area3D
@@ -46,18 +48,15 @@ func set_card_values(chosen_value, chosen_suit):
 func set_card_texture_paths(chosen_frontface, chosen_backface):
 	frontface = chosen_frontface
 	backface = chosen_backface
+
 func set_card_textures():
-	var original_material = $CollisionShape3D/Pivot/CardMesh.material_override
-	if original_material:
+	var original_material_front = $CollisionShape3D/CardMeshFront
+	var original_material_back = $CollisionShape3D/CardMeshBack
+	var front_tex = load(frontface) as Texture2D
+	var back_tex = load(backface) as Texture2D
 
-		var material = original_material.duplicate() as ShaderMaterial
-		$CollisionShape3D/Pivot/CardMesh.material_override = material
-
-		var front_texture_resource = load(frontface)
-		var back_texture_resource = load(backface)
-		
-		material.set_shader_parameter("front_texture", front_texture_resource)
-		material.set_shader_parameter("back_texture", back_texture_resource)
+	original_material_back.get_active_material(0).albedo_texture = back_tex
+	original_material_front.get_active_material(0).albedo_texture = front_tex
 
 func _ready() -> void:
 	for pile in get_tree().get_nodes_in_group("piles"):
@@ -76,10 +75,12 @@ func _toggle_selection():
 func _on_mouse_entered() -> void:
 	if not is_selected:
 		is_draggable = true
+		$CollisionShape3D/CardMeshBorder.material_overlay = outline_material
 
 func _on_mouse_exited() -> void:
 	if not is_selected:
 		is_draggable = false
+		$CollisionShape3D/CardMeshBorder.material_overlay = null
 
 func _on_pile_card_entered(card: Variant, pile: Area3D) -> void:
 	if card == self and !self.is_snapping:
@@ -109,9 +110,11 @@ func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3,
 					pop_from_current_pile()
 					snap_to_mouse_cursor(event.position)
 					pending_zones += 1
+					$PopSound.play()
 				# If by toggling we de-selected the card, we'll generate a pushing event and snap to pile.
 				else:
 					push_to_current_pile()
+					$PushSound.play()
 					# Card has been dropped in the current drop zone
 
 func push_to_current_pile():
@@ -123,14 +126,13 @@ func push_to_current_pile():
 		emit_signal("move")
 	print("Card Dropped: ", self)
 	emit_signal("card_pushed", self, current_pile)
-	$PushSound.play()
+
 
 # Problem with clarity and implementation: using this method outside of this class is risky, because you can call it on a card which is not the top
 # of a drop zone.
 func pop_from_current_pile():
 	print("Card Selected: ", self)
 	emit_signal("card_popped", self, current_pile)
-	$PopSound.play()
 	
 # ----- RayCasting and Geometrical Functions ------- #
 func get_mouse_world_pos(mouse:Vector2):
@@ -165,7 +167,7 @@ func snap_to_mouse_cursor(mouse_2d_position: Vector2):
 	var mouse_card_intersection = get_mouse_world_pos(mouse_2d_position)
 	print(mouse_card_intersection)
 	# The y plane along which the card will be dragged
-	drag_plane_y = global_transform.origin.y # Candidate for repositioning
+	drag_plane_y = global_transform.origin.y + 0.30 # Candidate for repositioning
 	# The flag disables drag update to animated the snapping to the cursor
 	is_snapping = true  # disable drag updates
 	# Tweening to animate
@@ -192,3 +194,7 @@ func drag_card():
 		var intersection = ray_plane_intersection(ray_origin, ray_direction, plane_point, Vector3.UP)
 		if intersection:
 			global_transform.origin = intersection
+
+
+func _on_start_pressed() -> void:
+	pass # Replace with function body.

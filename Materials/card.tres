@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://xyhxlxd16710"]
+
+[ext_resource type="Shader" uid="uid://bfqeju8fw5wuy" path="res://Shaders/card.gdshader" id="1_effwh"]
+[ext_resource type="Texture2D" uid="uid://d03q1ce60rlgj" path="res://Assets/Cards/cardBack_red2.png" id="2_hdbs0"]
+[ext_resource type="Texture2D" uid="uid://d3q0kwmohxi6j" path="res://Assets/Cards/cardClubsK.png" id="3_effwh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_effwh")
+shader_parameter/front_texture = ExtResource("3_effwh")
+shader_parameter/back_texture = ExtResource("2_hdbs0")
+shader_parameter/uv_scale = Vector2(3, 2)
+shader_parameter/uv_offset = Vector2(0, 0)

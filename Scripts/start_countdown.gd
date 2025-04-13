@@ -2,6 +2,9 @@ extends Label
 
 @export var start_timer: Timer
 
+func set_start_timer(timer):
+	start_timer = timer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

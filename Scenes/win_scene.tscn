@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4g04fv20hc22"]
+
+[ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://UI/UI_theme.tres" id="1_eafqm"]
+[ext_resource type="PackedScene" uid="uid://cd6t74xr21ld4" path="res://Scenes/card.tscn" id="2_hea1w"]
+
+[sub_resource type="Environment" id="Environment_b5jpj"]
+background_mode = 1
+background_color = Color(0.0294579, 0.0484503, 0.132208, 1)
+background_energy_multiplier = 0.77
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knexo"]
+albedo_color = Color(0, 0.296382, 0.101061, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2tg22"]
+material = SubResource("StandardMaterial3D_knexo")
+
+[node name="WinScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b5jpj")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_eafqm")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Control" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -42.0
+offset_right = 108.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/Panel/Container"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You've won!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/Container"]
+layout_mode = 2
+offset_left = -15.0
+offset_top = 85.0
+offset_right = 201.0
+offset_bottom = 131.0
+theme_override_constants/separation = 22
+
+[node name="Button" type="Button" parent="Control/Panel/Container/HBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Button2" type="Button" parent="Control/Panel/Container/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Queen" parent="Background" instance=ExtResource("2_hea1w")]
+transform = Transform3D(-0.954642, -0.297534, -0.0115361, 0.00717806, 0.0157355, -0.999851, 0.297671, -0.954582, -0.0128861, -1.68807, 1.49461, 0)
+
+[node name="King" parent="Background" instance=ExtResource("2_hea1w")]
+transform = Transform3D(0.924, -0.0301619, -0.381202, -0.382393, -0.072882, -0.921121, 0, 0.996884, -0.0788767, 0, 1.4849, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.747589, 0.664161, 0, -0.664161, 0.747589, 0, 4.94291, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.896237, 1.96239, 4.62571)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(16.8454, 0, 0, 0, -0.211098, 0, 0, 0, 8.0969, -0.838089, -0.48926, 0)
+mesh = SubResource("CylinderMesh_2tg22")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.109539, -0.508576, -0.854021, 0.0647012, 0.861017, -0.504443, 0.991874, 0, 0.12722, -5.91031, 0, 0)
+spot_range = 5.375
+spot_attenuation = -3.11
+spot_angle = 35.14
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.0691932, 0.508157, 0.858481, 0.0647012, 0.861017, -0.504443, -0.995503, 0.0206407, -0.0924549, 4.0029, 0, 0)
+spot_range = 6.523
+spot_attenuation = -1.56

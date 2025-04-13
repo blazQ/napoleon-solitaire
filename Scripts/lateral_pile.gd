@@ -1,15 +1,27 @@
 extends "res://Scripts/pile.gd"
 
+var LateralDropZoneMarker = preload("res://Scenes/lateral_drop_zone_marker.tscn")
+
+const lateral_marker_offset = 1.6
 const CARD_WIDTH: int = 2
 # True = RIGHT
 # False = LEFT
 @export var GROWTH_DIRECTION: bool = true
 
+func _ready() -> void:
+	super()
+	if GROWTH_DIRECTION:
+		$RightMarker.queue_free()
+	else:
+		$LeftMarker.queue_free()
+
 func _modify_snap_point(increase: bool):
-	increase = !increase if !GROWTH_DIRECTION else increase
 	var pile_offset_sgn = pile_offset if increase else -pile_offset
+	self.snap_point.y += pile_offset_sgn / 64
+	
+	pile_offset_sgn = -pile_offset_sgn if !GROWTH_DIRECTION else pile_offset_sgn
 	self.snap_point.x += pile_offset_sgn
-	self.snap_point.y += pile_offset / 16
+
 
 func _modify_drop_shape(increase: bool):
 	var collision_shape = $DropZoneShape
