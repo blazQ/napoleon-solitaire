@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://da5jv3dfqlg5o"]
 
 [ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://UI/UI_theme.tres" id="1_fj580"]
-[ext_resource type="Script" uid="uid://b407kynnh82fj" path="res://Scenes/settings_container.gd" id="1_k126x"]
+[ext_resource type="Script" uid="uid://b407kynnh82fj" path="res://Scripts/settings_container.gd" id="1_k126x"]
 
 [node name="SettingsContainer" type="VBoxContainer"]
 anchors_preset = 8
