@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://iq3dv5d1aiqy"]
+
+[ext_resource type="Shader" uid="uid://bxb32b1phl3rk" path="res://Shaders/card_highlight.gdshader" id="1_0laok"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0laok")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 2.5
+shader_parameter/shine_speed = 3.5
+shader_parameter/shine_width = 100.0
+shader_parameter/shine_angle_x = 45.0
+shader_parameter/shine_angle_y = 30.0
+shader_parameter/shine_angle_z = 90.0

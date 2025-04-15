@@ -6,11 +6,12 @@ const CardConstants = preload("res://Scripts/card_constants.gd")
 var deck : Array
 var deck_node
 
-@export var start_time: float
 @export var game_started: bool = false
 @export var move_count: int = 0
-@export var elapsed_time: float
+@export var game_time: float = 0
+@export var paused: bool = false
 
+@onready var pause_menu = $PauseMenu
 
 var piles_filled : int = 0
 
@@ -22,9 +23,11 @@ signal ui_update_move_count(move_count)
 
 # ------------------------------- Scene Instancing
 func _ready():
-	deck_node = $Zones/Deck
 	for pile in get_tree().get_nodes_in_group("special_piles"):
 		pile.pile_filled.connect(_on_pile_filled)
+	pause_menu.unpause.connect(_handle_pause)
+	
+	deck_node = $Zones/Deck
 	instance_deck()
 	deck.shuffle()
 	place_deck()
@@ -32,8 +35,11 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if game_started:
-		elapsed_time = Time.get_unix_time_from_system() - start_time
-		emit_signal("ui_update_time", elapsed_time)
+		if !paused:
+			game_time += delta
+			emit_signal("ui_update_time", int(game_time))
+		if Input.is_action_just_pressed("pause"):
+			_handle_pause()
 
 ## Instancing the deck and placing it in the deck pile
 func instance_deck():
@@ -116,6 +122,8 @@ func _on_card_pushed(_pushed_card: Area3D, _pile: Area3D):
 			card.get_node("CollisionShape3D").disabled = true
 		elif card.is_pile_top and !card.is_finalized:
 			card.get_node("CollisionShape3D").disabled = false
+	if piles_filled == 4:
+		emit_signal("game_over")
 
 # Handling every time a card is popped from a drop zone by updating its collision shape so it's no longer selectable.
 # Popping a card from a drop zone implicitly means moving it to the player's hand.
@@ -124,7 +132,10 @@ func _on_card_popped(popped_card: Area3D, _pile: Area3D):
 	for card in get_tree().get_nodes_in_group("cards"):
 		if card != popped_card:
 			card.get_node("CollisionShape3D").disabled = true
+	
+# ------------ Game Logic Functions 
 
+# Handling initial shuffling and cards distribution.
 func _on_game_start_timeout() -> void:
 	var card_index: int = 0
 	var piles = [
@@ -150,15 +161,11 @@ func _on_game_start_timeout() -> void:
 	$Shuffle.play()
 	$InputBlocker.call_deferred("queue_free")
 	delete_deck_node()
-	start_time = Time.get_unix_time_from_system()
 	game_started = true
-	
 
 func _on_pile_filled():
 	piles_filled += 1
 	print(piles_filled)
-	if piles_filled == 4:
-		emit_signal("game_over")
 
 func _on_move():
 	if game_started:
@@ -169,3 +176,11 @@ func _on_move():
 
 func _on_game_over():
 	get_tree().change_scene_to_file("res://Scenes/win_scene.tscn")
+
+func _handle_pause():
+	if paused:
+		pause_menu.hide()
+	else:
+		pause_menu.show()
+
+	paused = !paused

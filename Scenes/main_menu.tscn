@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd6nc3xkpn53x"]
+[gd_scene load_steps=8 format=3 uid="uid://bd6nc3xkpn53x"]
 
 [ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://UI/UI_theme.tres" id="1_1ehe0"]
 [ext_resource type="Script" uid="uid://xu8lteujq4p" path="res://Scripts/main_menu.gd" id="1_48xlc"]
 [ext_resource type="PackedScene" uid="uid://cd6t74xr21ld4" path="res://Scenes/card.tscn" id="4_ce3w2"]
+[ext_resource type="PackedScene" uid="uid://da5jv3dfqlg5o" path="res://Scenes/settings_container.tscn" id="4_n45e2"]
 
 [sub_resource type="Environment" id="Environment_28flt"]
 background_mode = 1
@@ -15,7 +16,6 @@ albedo_color = Color(0.154326, 0.328545, 0.138501, 1)
 material = SubResource("StandardMaterial3D_48xlc")
 
 [node name="MainMenu" type="Node3D"]
-script = ExtResource("1_48xlc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_28flt")
@@ -33,9 +33,13 @@ fov = 70.9
 
 [node name="Card" parent="Background" instance=ExtResource("4_ce3w2")]
 transform = Transform3D(-0.88162, 0.0695204, 0.466599, -0.0745668, -0.997087, 0.00766891, 0.465819, -0.0280345, 0.884323, -1.07236, 0.449955, 0.10711)
+monitoring = false
+monitorable = false
 
 [node name="Card2" parent="Background" instance=ExtResource("4_ce3w2")]
 transform = Transform3D(0.999451, 0.0299561, -0.00112567, -0.0299773, 0.998746, -0.03753, 0, 0.0375469, 0.999195, 0, 0.42593, 0)
+monitoring = false
+monitorable = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Background"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.203661, 5.22627, -0.474487)
@@ -53,6 +57,7 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1ehe0")
+script = ExtResource("1_48xlc")
 
 [node name="Panel" type="Panel" parent="MainMenuUI"]
 layout_mode = 1
@@ -62,32 +67,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUI/Panel"]
+[node name="SettingsContainer" parent="MainMenuUI/Panel" node_paths=PackedStringArray("siblingContainer") instance=ExtResource("4_n45e2")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 171.0
+offset_top = 225.0
+offset_right = 671.0
+offset_bottom = 525.0
+grow_horizontal = 1
+siblingContainer = NodePath("../MainMenuContainer")
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenuUI/Panel"]
 custom_minimum_size = Vector2(450, 300)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.136285
-anchor_top = 0.359568
+anchor_top = 0.29321
 anchor_right = 0.52691
-anchor_bottom = 0.822531
+anchor_bottom = 0.756173
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Start" type="Button" parent="MainMenuUI/Panel/VBoxContainer"]
+[node name="Start" type="Button" parent="MainMenuUI/Panel/MainMenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Start"
 
-[node name="Settings" type="Button" parent="MainMenuUI/Panel/VBoxContainer"]
+[node name="Settings" type="Button" parent="MainMenuUI/Panel/MainMenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Settings"
 
-[node name="Exit" type="Button" parent="MainMenuUI/Panel/VBoxContainer"]
+[node name="Exit" type="Button" parent="MainMenuUI/Panel/MainMenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Exit"
+text = "Quit"
 
-[connection signal="pressed" from="MainMenuUI/Panel/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MainMenuUI/Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MainMenuUI/Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MainMenuUI/Panel/MainMenuContainer/Start" to="MainMenuUI" method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenuUI/Panel/MainMenuContainer/Settings" to="MainMenuUI" method="_on_settings_pressed"]
+[connection signal="pressed" from="MainMenuUI/Panel/MainMenuContainer/Exit" to="MainMenuUI" method="_on_exit_pressed"]

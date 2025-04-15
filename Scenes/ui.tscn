@@ -37,7 +37,7 @@ metadata/_edit_use_anchors_ = true
 [node name="ElapsedTimeLabel" type="Label" parent="MenuPanel/ScoreTime"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "00:00"
+text = "00:00:00"
 
 [node name="MoveCount" type="Label" parent="MenuPanel/ScoreTime"]
 layout_mode = 2
@@ -54,10 +54,4 @@ layout_mode = 2
 action_mode = 0
 text = "Reshuffle"
 
-[node name="Exit" type="Button" parent="MenuPanel/ScoreTime/HBoxContainer"]
-layout_mode = 2
-action_mode = 0
-text = "Exit"
-
 [connection signal="pressed" from="MenuPanel/ScoreTime/HBoxContainer/Reshuffle" to="." method="_on_reshuffle_pressed"]
-[connection signal="pressed" from="MenuPanel/ScoreTime/HBoxContainer/Exit" to="." method="_on_exit_pressed"]

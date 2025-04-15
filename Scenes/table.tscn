@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dawu648x4k7co"]
+[gd_scene load_steps=11 format=3 uid="uid://dawu648x4k7co"]
 
 [ext_resource type="Script" uid="uid://cth0jmt58hv11" path="res://Scripts/card_manager.gd" id="1_jd0nb"]
 [ext_resource type="PackedScene" uid="uid://h2sqwt4cw6ot" path="res://Scenes/pile.tscn" id="2_v5i0k"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://h2tna386st2p" path="res://Scenes/central_pile.tscn" id="4_vjl2i"]
 [ext_resource type="PackedScene" uid="uid://svfu46qgpv04" path="res://Scenes/lateral_pile.tscn" id="5_67vji"]
 [ext_resource type="PackedScene" uid="uid://ywpcfgy1ypld" path="res://Scenes/ui.tscn" id="7_usajj"]
+[ext_resource type="PackedScene" uid="uid://qlnomuyrp2jb" path="res://Scenes/pause_menu.tscn" id="8_o4lkm"]
 [ext_resource type="AudioStream" uid="uid://cwiuqfhot11l4" path="res://Assets/Audio/switch_004.ogg" id="9_xexre"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_xhfwg"]
@@ -27,21 +28,25 @@ current = true
 fov = 70.0
 size = 30.0
 near = 0.064
+far = 2000.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.622349, -0.747926, 0.230844, -0.720114, -0.4315, 0.543363, -0.306786, -0.504395, -0.807135, -6.31388, 30.2579, -15.2779)
 light_energy = 0.857
 shadow_enabled = true
 shadow_bias = 0.19
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 519.8
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.000418887, 1, 0, -1, 0.000418887, 0.455505, 8.01022, 4.94007)
-light_energy = 1.256
-light_indirect_energy = 1.887
-spot_range = 29.8
+transform = Transform3D(1, 0, 0, 0, 0.000418887, 1, 0, -1, 0.000418887, 0.455505, 8.01022, 1.78825)
+light_energy = 1.074
+light_indirect_energy = 1.342
+light_volumetric_fog_energy = 2.273
+spot_range = 69.6589
 spot_attenuation = -0.14
-spot_angle = 80.34
-spot_angle_attenuation = 0.406126
+spot_angle = 69.2839
+spot_angle_attenuation = 1.93187
 
 [node name="Table" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.0354)
@@ -120,12 +125,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 3
 
-[node name="UI" parent="." instance=ExtResource("7_usajj")]
+[node name="GameUI" parent="." instance=ExtResource("7_usajj")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("8_o4lkm")]
+process_mode = 3
 
 [connection signal="game_over" from="." to="." method="_on_game_over"]
-[connection signal="game_over" from="." to="UI" method="_on_solitaire_game_over"]
-[connection signal="game_over" from="." to="UI/MenuPanel/ScoreTime/ElapsedTimeLabel" method="_on_solitaire_game_over"]
-[connection signal="ui_update_move_count" from="." to="UI" method="_on_solitaire_ui_update_move_count"]
-[connection signal="ui_update_time" from="." to="UI" method="_on_solitaire_ui_update_time"]
+[connection signal="game_over" from="." to="GameUI" method="_on_solitaire_game_over"]
+[connection signal="game_over" from="." to="GameUI/MenuPanel/ScoreTime/ElapsedTimeLabel" method="_on_solitaire_game_over"]
+[connection signal="ui_update_move_count" from="." to="GameUI" method="_on_solitaire_ui_update_move_count"]
+[connection signal="ui_update_time" from="." to="GameUI" method="_on_solitaire_ui_update_time"]
 [connection signal="timeout" from="GameStart" to="." method="_on_game_start_timeout"]

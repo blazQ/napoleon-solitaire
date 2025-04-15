@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://qlnomuyrp2jb"]
+
+[ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://UI/UI_theme.tres" id="1_k0w1u"]
+[ext_resource type="Script" uid="uid://doggbraxc5t1d" path="res://Scenes/pause_menu.gd" id="2_1och7"]
+[ext_resource type="PackedScene" uid="uid://da5jv3dfqlg5o" path="res://Scenes/settings_container.tscn" id="3_1och7"]
+[ext_resource type="Shader" uid="uid://cfeucg10b2qb6" path="res://Shaders/pause_menu_blur.gdshader" id="3_bpi0q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmyb1"]
+shader = ExtResource("3_bpi0q")
+shader_parameter/amount = 1.5
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_k0w1u")
+script = ExtResource("2_1och7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_vmyb1")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -60.0
+offset_right = 127.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsContainer" parent="MarginContainer" node_paths=PackedStringArray("siblingContainer") instance=ExtResource("3_1och7")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+siblingContainer = NodePath("../PauseContainer")
+
+[node name="PauseContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/PauseContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="MarginContainer/PauseContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="MainMenu" type="Button" parent="MarginContainer/PauseContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="MarginContainer/PauseContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/PauseContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/PauseContainer/Quit" to="." method="_on_quit_pressed"]
