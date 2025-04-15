@@ -2,4 +2,4 @@
 .godot/
 /android/
 *.tmp
-godot-git-plugin/*
+addons/godot-git-plugin/*
