@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://da5jv3dfqlg5o"]
+[gd_scene load_steps=4 format=3 uid="uid://da5jv3dfqlg5o"]
 
 [ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://UI/UI_theme.tres" id="1_fj580"]
 [ext_resource type="Script" uid="uid://b407kynnh82fj" path="res://Scripts/settings_container.gd" id="1_k126x"]
+[ext_resource type="PackedScene" uid="uid://ut0gvkitxryu" path="res://Scenes/volume_slider.tscn" id="3_mykdy"]
 
 [node name="SettingsContainer" type="VBoxContainer"]
 anchors_preset = 8
@@ -9,12 +10,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -125.0
-offset_right = 175.0
-offset_bottom = 125.0
+offset_left = -174.0
+offset_top = -200.0
+offset_right = 176.0
+offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme = ExtResource("1_fj580")
 script = ExtResource("1_k126x")
 
@@ -27,6 +30,85 @@ text = "CRT Filter: false"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Fullscreen: true"
+
+[node name="MasterAudio" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MasterVolume" type="Label" parent="MasterAudio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.157143
+anchor_top = 0.132813
+anchor_right = 0.842857
+anchor_bottom = 0.726563
+grow_horizontal = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" parent="MasterAudio/MasterVolume" instance=ExtResource("3_mykdy")]
+layout_mode = 1
+anchors_preset = 12
+anchor_left = 0.0
+anchor_right = 1.0
+offset_left = 0.0
+offset_top = -8.0
+offset_right = 0.0
+offset_bottom = 18.0
+bus_name = "Master"
+
+[node name="SFXAudio" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MasterVolume" type="Label" parent="SFXAudio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.157143
+anchor_top = 0.132813
+anchor_right = 0.842857
+anchor_bottom = 0.726563
+grow_horizontal = 2
+grow_vertical = 2
+text = "SFX Volume"
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeSlider" parent="SFXAudio/MasterVolume" instance=ExtResource("3_mykdy")]
+layout_mode = 1
+anchors_preset = 12
+anchor_left = 0.0
+anchor_right = 1.0
+offset_left = 0.0
+offset_top = -9.0
+offset_right = 0.0
+offset_bottom = 18.0
+bus_name = "Sfx"
+
+[node name="MusicAudio" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MasterVolume" type="Label" parent="MusicAudio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.157143
+anchor_top = 0.132813
+anchor_right = 0.842857
+anchor_bottom = 0.726563
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music Volume"
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeSlider" parent="MusicAudio/MasterVolume" instance=ExtResource("3_mykdy")]
+layout_mode = 1
+anchors_preset = 12
+anchor_left = 0.0
+anchor_right = 1.0
+offset_left = 0.0
+offset_top = -7.0
+offset_right = 0.0
+offset_bottom = 20.0
+bus_name = "Music"
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 2

@@ -81,9 +81,11 @@ text = "Exit"
 
 [node name="Queen" parent="Background" instance=ExtResource("2_hea1w")]
 transform = Transform3D(-0.954642, -0.297534, -0.0115361, 0.00717806, 0.0157355, -0.999851, 0.297671, -0.954582, -0.0128861, -1.68807, 1.49461, 0)
+script = null
 
 [node name="King" parent="Background" instance=ExtResource("2_hea1w")]
 transform = Transform3D(0.924, -0.0301619, -0.381202, -0.382393, -0.072882, -0.921121, 0, 0.996884, -0.0788767, 0, 1.4849, 0)
+script = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.747589, 0.664161, 0, -0.664161, 0.747589, 0, 4.94291, 0)

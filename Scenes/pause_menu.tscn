@@ -35,21 +35,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = -60.0
-offset_right = 127.0
-offset_bottom = 50.0
+offset_left = -130.5
+offset_top = -226.0
+offset_right = 130.5
+offset_bottom = 226.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SettingsContainer" parent="MarginContainer" node_paths=PackedStringArray("siblingContainer") instance=ExtResource("3_1och7")]
 visible = false
+custom_minimum_size = Vector2(200, 400)
 layout_mode = 2
-size_flags_horizontal = 4
 siblingContainer = NodePath("../PauseContainer")
 
 [node name="PauseContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Resume" type="Button" parent="MarginContainer/PauseContainer"]
 layout_mode = 2

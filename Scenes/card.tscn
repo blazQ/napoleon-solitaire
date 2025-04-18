@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cs4j3jda5h4v1" path="res://Materials/front_material.tres" id="2_e6po8"]
 [ext_resource type="Texture2D" uid="uid://d03q1ce60rlgj" path="res://Assets/Cards/cardBack_red2.png" id="3_u5wvb"]
 [ext_resource type="Material" uid="uid://c326ugxrbrbd0" path="res://Materials/card_outline.tres" id="4_bnspj"]
-[ext_resource type="AudioStream" uid="uid://chf44lmhaomp0" path="res://Assets/Audio/drop_004.ogg" id="5_bnspj"]
-[ext_resource type="AudioStream" uid="uid://3qy418jt8yhd" path="res://Assets/Audio/click_003.ogg" id="5_xnv4g"]
+[ext_resource type="AudioStream" uid="uid://3qy418jt8yhd" path="res://Assets/Audio/SFX/click_003.ogg" id="5_bnspj"]
+[ext_resource type="AudioStream" uid="uid://chf44lmhaomp0" path="res://Assets/Audio/SFX/drop_004.ogg" id="6_xnv4g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e484p"]
 resource_local_to_scene = true
@@ -65,10 +65,12 @@ mesh = SubResource("BoxMesh_bnspj")
 skeleton = NodePath("../..")
 
 [node name="PopSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_xnv4g")
+stream = ExtResource("5_bnspj")
+bus = &"Sfx"
 
 [node name="PushSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_bnspj")
+stream = ExtResource("6_xnv4g")
+bus = &"Sfx"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
