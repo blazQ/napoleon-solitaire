@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://deylyxflk5r0u"
+path="res://.godot/imported/SFX-Analog Lab V 01-06(1).wav-08b8b3e3a925df9c086cc83e85584bcc.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/SFX-Analog Lab V 01-06(1).wav"
+dest_files=["res://.godot/imported/SFX-Analog Lab V 01-06(1).wav-08b8b3e3a925df9c086cc83e85584bcc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

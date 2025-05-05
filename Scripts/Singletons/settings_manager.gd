@@ -2,11 +2,12 @@ extends Node
 
 @onready var video_settings = ConfigFileHandler.load_video_settings()
 
-var crt_filter_scene = preload("res://Scenes/crt_filter.tscn")
+var crt_filter_scene = preload(Strings.CRT_FILTER)
 var crt_filter_instance : CanvasLayer
 
 var fullscreen_enabled := true
 var crt_enabled := false
+var camera_shake_enabled := false
 var crt_pending := false
 
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 	crt_enabled = video_settings["crt"]
 	if crt_enabled:
 		call_deferred("_add_crt_filter")
+	camera_shake_enabled = video_settings["shake"]
 
 func set_crt_enabled():
 	crt_enabled = !crt_enabled
@@ -47,3 +49,7 @@ func set_fullscreen():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+func set_camera_shake():
+	camera_shake_enabled = !camera_shake_enabled
+	ConfigFileHandler.save_video_settings("shake", SettingsManager.camera_shake_enabled)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://h2sqwt4cw6ot"]
+
+[ext_resource type="Script" uid="uid://dklt5fo64s1m7" path="res://Scenes/pile/pile.gd" id="1_mw0at"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6gytn"]
+resource_local_to_scene = true
+size = Vector3(3, 1.51855, 4)
+
+[node name="DropZone" type="Area3D"]
+collision_mask = 0
+input_ray_pickable = false
+priority = 1
+script = ExtResource("1_mw0at")
+
+[node name="DropZoneShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -0.000114169, 0.000249147, 0.00011419, 1, -5.35803e-05, -0.000249138, 5.36238e-05, 1, 0.000141652, 0.759277, -6.65323e-05)
+shape = SubResource("BoxShape3D_6gytn")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

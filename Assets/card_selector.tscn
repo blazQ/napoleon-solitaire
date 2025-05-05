@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6ewxol5y80i8"]
+
+[ext_resource type="Script" uid="uid://ncli4ygg5wnr" path="res://Scenes/game/card_selector.gd" id="1_glcrd"]
+
+[node name="CardSelector" type="Node3D"]
+script = ExtResource("1_glcrd")

@@ -9,6 +9,7 @@ func _ready():
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
 		config.set_value("video", "fullscreen", true)
 		config.set_value("video", "crt", false)
+		config.set_value("video", "shake", true)
 		
 		config.set_value("audio", "Master", 1.0)
 		config.set_value("audio", "Sfx", 1.0)

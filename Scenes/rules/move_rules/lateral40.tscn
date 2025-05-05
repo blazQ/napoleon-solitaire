@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://by121suvbrow5"]
+
+[ext_resource type="PackedScene" uid="uid://b3rs5bgjuuoeu" path="res://Scenes/rules/move_rules/move_rule_component.tscn" id="1_6je3w"]
+[ext_resource type="Script" uid="uid://ewi6o51y8cn6" path="res://lateral_40.gd" id="2_11dx1"]
+
+[node name="Lateral40" instance=ExtResource("1_6je3w")]
+script = ExtResource("2_11dx1")

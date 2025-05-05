@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://bd6nc3xkpn53x"]
+
+[ext_resource type="PackedScene" uid="uid://cd6t74xr21ld4" path="res://Scenes/card/card.tscn" id="1_lrbam"]
+[ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://Style/UI_theme.tres" id="2_w3tlh"]
+[ext_resource type="Script" uid="uid://xu8lteujq4p" path="res://Scenes/ui/main_menu.gd" id="3_cyelx"]
+[ext_resource type="PackedScene" uid="uid://da5jv3dfqlg5o" path="res://Scenes/ui/settings_container.tscn" id="4_20w3n"]
+
+[sub_resource type="Environment" id="Environment_28flt"]
+background_mode = 1
+background_color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48xlc"]
+albedo_color = Color(0.154326, 0.328545, 0.138501, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1ehe0"]
+material = SubResource("StandardMaterial3D_48xlc")
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_28flt")
+
+[node name="Background" type="Node3D" parent="."]
+transform = Transform3D(1.0001, 0, 0, 0, 1.0001, 0, 0, 0, 1.0001, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(33.6004, 0, 0, 0, 0.202713, 0, 0, 0, 15.5432, 0, 0, -0.522904)
+mesh = SubResource("CylinderMesh_1ehe0")
+
+[node name="Camera3D" type="Camera3D" parent="Background"]
+transform = Transform3D(0.9999, 0, 0, 0, 0.496425, 0.867965, 0, -0.867965, 0.496425, -1.92072, 4.22461, 2.50844)
+fov = 70.9
+
+[node name="Card" parent="Background" instance=ExtResource("1_lrbam")]
+transform = Transform3D(-0.909151, 0.0711448, 0.410103, -0.0745668, -0.997087, 0.00766891, 0.409495, -0.0236102, 0.911898, -1.07236, 0.270453, 0.10711)
+monitoring = false
+monitorable = false
+priority = -1
+script = null
+
+[node name="Card2" parent="Background" instance=ExtResource("1_lrbam")]
+transform = Transform3D(0.999451, 0.0299561, -0.00112567, -0.0299773, 0.998793, -0.0362569, 3.81939e-05, 0.0362744, 0.999242, 0, 0.440214, 0)
+monitoring = false
+monitorable = false
+priority = -1
+script = null
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.203661, 5.22627, -0.474487)
+spot_range = 7.31
+spot_attenuation = -0.64
+spot_angle = 47.4886
+
+[node name="MainMenuUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_w3tlh")
+script = ExtResource("3_cyelx")
+
+[node name="Panel" type="Panel" parent="MainMenuUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsContainer" parent="MainMenuUI/Panel" node_paths=PackedStringArray("siblingContainer") instance=ExtResource("4_20w3n")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.134375
+anchor_top = 0.220833
+anchor_right = 0.525
+anchor_bottom = 0.8375
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 1
+siblingContainer = NodePath("../MainMenuContainer")
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="MainMenuUI/Panel"]
+custom_minimum_size = Vector2(450, 300)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.136285
+anchor_top = 0.29321
+anchor_right = 0.52691
+anchor_bottom = 0.756173
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="MainMenuUI/Panel/MainMenuContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start"
+
+[node name="Settings" type="Button" parent="MainMenuUI/Panel/MainMenuContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="Exit" type="Button" parent="MainMenuUI/Panel/MainMenuContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[connection signal="pressed" from="MainMenuUI/Panel/MainMenuContainer/Start" to="MainMenuUI" method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenuUI/Panel/MainMenuContainer/Settings" to="MainMenuUI" method="_on_settings_pressed"]
+[connection signal="pressed" from="MainMenuUI/Panel/MainMenuContainer/Exit" to="MainMenuUI" method="_on_exit_pressed"]

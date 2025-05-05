@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3df0nwsrk5si"]
+
+[ext_resource type="PackedScene" uid="uid://h2tna386st2p" path="res://Scenes/pile/central_pile.tscn" id="1_kwgfo"]
+[ext_resource type="Script" uid="uid://725ruxg4ouxy" path="res://Scenes/field/field.gd" id="1_y6vp1"]
+[ext_resource type="PackedScene" uid="uid://svfu46qgpv04" path="res://Scenes/pile/lateral_pile.tscn" id="2_4ep3c"]
+[ext_resource type="Script" uid="uid://fw2ooyvr4psx" path="res://Scenes/rules/move_rules/move_rule_central_40_component.gd" id="3_wwv1w"]
+[ext_resource type="PackedScene" uid="uid://h2sqwt4cw6ot" path="res://Scenes/pile/pile.tscn" id="3_y6vp1"]
+[ext_resource type="Script" uid="uid://ewi6o51y8cn6" path="res://lateral_40.gd" id="5_wwv1w"]
+
+[node name="Zones" type="Node3D"]
+script = ExtResource("1_y6vp1")
+
+[node name="Foundations" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="HeartsPile" parent="Foundations" node_paths=PackedStringArray("rule_component") groups=["piles", "special_piles"] instance=ExtResource("1_kwgfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09072, 0.6, -7.14403)
+suit = 3
+foundation = 1
+capacity = 10
+rule_component = NodePath("../../Central40")
+
+[node name="DiamondsPile" parent="Foundations" node_paths=PackedStringArray("rule_component") groups=["piles", "special_piles"] instance=ExtResource("1_kwgfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09072, 0.6, -1.14403)
+suit = 2
+foundation = 1
+capacity = 10
+rule_component = NodePath("../../Central40")
+
+[node name="ClubsPile" parent="Foundations" node_paths=PackedStringArray("rule_component") groups=["piles", "special_piles"] instance=ExtResource("1_kwgfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09072, 0.6, 4.85597)
+foundation = 1
+capacity = 10
+rule_component = NodePath("../../Central40")
+
+[node name="SpadesPile" parent="Foundations" node_paths=PackedStringArray("rule_component") groups=["piles", "special_piles"] instance=ExtResource("1_kwgfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09072, 0.6, 10.856)
+suit = 1
+foundation = 1
+capacity = 10
+rule_component = NodePath("../../Central40")
+
+[node name="PlayingZones" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="A1" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90928, 0.6, -7.14403)
+GROWTH_DIRECTION = false
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="B1" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.09072, 0.6, -7.14403)
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="A2" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90928, 0.6, -1.14403)
+GROWTH_DIRECTION = false
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="B2" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.09072, 0.6, -1.14403)
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="A3" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90928, 0.6, 4.85597)
+GROWTH_DIRECTION = false
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="B3" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.09072, 0.6, 4.85597)
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="A4" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.90928, 0.6, 10.856)
+GROWTH_DIRECTION = false
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="B4" parent="PlayingZones" node_paths=PackedStringArray("rule_component") groups=["piles"] instance=ExtResource("2_4ep3c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.09072, 0.6, 10.856)
+rule_component = NodePath("../../Lateral40")
+pile_offset = 0.7
+
+[node name="Deck" parent="." groups=["piles"] instance=ExtResource("3_y6vp1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225265, 20.794, 0)
+
+[node name="Lateral40" type="Node" parent="."]
+script = ExtResource("5_wwv1w")
+metadata/_custom_type_script = "uid://ewi6o51y8cn6"
+
+[node name="Central40" type="Node" parent="."]
+script = ExtResource("3_wwv1w")
+metadata/_custom_type_script = "uid://fw2ooyvr4psx"

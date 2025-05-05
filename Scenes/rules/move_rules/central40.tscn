@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp1mpoi44b7vk"]
+
+[ext_resource type="PackedScene" uid="uid://b3rs5bgjuuoeu" path="res://Scenes/rules/move_rules/move_rule_component.tscn" id="1_bl151"]
+[ext_resource type="Script" uid="uid://fw2ooyvr4psx" path="res://Scenes/rules/move_rules/move_rule_central_40_component.gd" id="2_xcm7e"]
+
+[node name="MoveRuleComponent" instance=ExtResource("1_bl151")]
+script = ExtResource("2_xcm7e")

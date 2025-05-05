@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://biolny73fuxni"
+path="res://.godot/imported/1 - b.ogg-44227a1e64d9687a4070fdd4fe8f7fb8.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/BGM/1 - b.ogg"
+dest_files=["res://.godot/imported/1 - b.ogg-44227a1e64d9687a4070fdd4fe8f7fb8.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

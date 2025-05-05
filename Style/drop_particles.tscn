@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://rk5wyyfl0j16"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oay22"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+velocity_pivot = Vector3(0, -0.5, 0)
+direction = Vector3(0, -1, 0)
+spread = 75.0
+flatness = 0.1
+initial_velocity_min = 19.23
+initial_velocity_max = 281.63
+gravity = Vector3(0, 20, 3)
+linear_accel_min = -26.53
+linear_accel_max = 0.439998
+radial_accel_min = 33.85
+radial_accel_max = 47.99
+damping_max = 5.66
+scale_over_velocity_min = 7.21
+scale_over_velocity_max = 44.52
+
+[sub_resource type="QuadMesh" id="QuadMesh_jhsog"]
+size = Vector2(0.1, 0.1)
+
+[node name="DropParticles" type="GPUParticles3D"]
+emitting = false
+amount = 1000
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.83
+randomness = 1.0
+visibility_aabb = AABB(-3, -3, -3, 6, 6, 6)
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_oay22")
+draw_pass_1 = SubResource("QuadMesh_jhsog")

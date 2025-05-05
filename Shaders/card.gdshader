@@ -5,7 +5,7 @@ uniform sampler2D front_texture : source_color;
 uniform sampler2D back_texture : source_color;
 
 uniform vec2 uv_scale = vec2(3.0, 2.0);
-uniform vec2 uv_offset = vec2(0.0, 0.0);
+uniform vec2 uv_offset = vec2(1.0, 1.0);
 
 void vertex() {
     UV = UV * uv_scale + uv_offset;

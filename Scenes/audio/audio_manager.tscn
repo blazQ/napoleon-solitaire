@@ -1,0 +1,91 @@
+[gd_scene load_steps=21 format=3 uid="uid://dbofxwc4mh58f"]
+
+[ext_resource type="Script" uid="uid://bx6kguyq63dh7" path="res://Scenes/audio/audio_manager.gd" id="1_astvc"]
+[ext_resource type="AudioStream" uid="uid://dgq64m7j3mvw5" path="res://Assets/Audio/BGM/1 - a.ogg" id="1_mfnxe"]
+[ext_resource type="AudioStream" uid="uid://dg3s2a62yfg7n" path="res://Assets/Audio/BGM/2 - a.ogg" id="2_astvc"]
+[ext_resource type="AudioStream" uid="uid://bts54mqsi65jp" path="res://Assets/Audio/BGM/3 - a.ogg" id="3_ma34g"]
+[ext_resource type="AudioStream" uid="uid://ds2v7sob6mlhm" path="res://Assets/Audio/BGM/4 - a.ogg" id="4_hokuy"]
+[ext_resource type="AudioStream" uid="uid://biolny73fuxni" path="res://Assets/Audio/BGM/1 - b.ogg" id="5_alxyf"]
+[ext_resource type="AudioStream" uid="uid://cspkrnh4s5y2l" path="res://Assets/Audio/BGM/2 - b.ogg" id="6_n8htm"]
+[ext_resource type="AudioStream" uid="uid://be6br3b3gi1va" path="res://Assets/Audio/BGM/3 - b.ogg" id="7_jkoco"]
+[ext_resource type="AudioStream" uid="uid://b4url85yuj4s" path="res://Assets/Audio/BGM/4 - b.ogg" id="8_wcghe"]
+[ext_resource type="AudioStream" uid="uid://cn535nmdu5mt3" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-05.wav" id="9_8sgsp"]
+[ext_resource type="AudioStream" uid="uid://cik4antf4aeox" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-06.wav" id="10_rfos7"]
+[ext_resource type="AudioStream" uid="uid://b5c1bdcryd66q" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-07.wav" id="11_o2ba0"]
+[ext_resource type="AudioStream" uid="uid://cbem8gmn7rev7" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-10.wav" id="12_e4pva"]
+[ext_resource type="AudioStream" uid="uid://bkwarg8l2n1l6" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-08.wav" id="13_hbb3y"]
+[ext_resource type="AudioStream" uid="uid://dvfhud2bmutwf" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-09.wav" id="14_wxfw7"]
+[ext_resource type="AudioStream" uid="uid://dso7uqyn0ad28" path="res://Assets/Audio/SFX/SFX-Analog Lab V 01-11.wav" id="15_7l730"]
+[ext_resource type="AudioStream" uid="uid://c47dbhksi6g67" path="res://Assets/Audio/SFX/73599__willc2_45220__swoop_hissy_01.wav" id="16_nkxx2"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_68wwg"]
+stream_count = 4
+stream_0/stream = ExtResource("1_mfnxe")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_astvc")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_ma34g")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("4_hokuy")
+stream_3/volume = 0.0
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_duc3a"]
+stream_count = 4
+stream_0/stream = ExtResource("5_alxyf")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("6_n8htm")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("7_jkoco")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("8_wcghe")
+stream_3/volume = 0.0
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_8bpql"]
+clip_count = 2
+clip_0/name = &"A"
+clip_0/stream = SubResource("AudioStreamSynchronized_68wwg")
+clip_0/auto_advance = 0
+clip_1/name = &"B"
+clip_1/stream = SubResource("AudioStreamSynchronized_duc3a")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 3,
+"to_time": 1
+}
+}
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_astvc")
+
+[node name="BGMDirector" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_8bpql")
+volume_db = -5.0
+autoplay = true
+bus = &"Music"
+
+[node name="FirstPileFilled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_8sgsp")
+
+[node name="SecondPileFilled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_rfos7")
+
+[node name="ThirdPileFilled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_o2ba0")
+
+[node name="HeartsDrop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_e4pva")
+
+[node name="SpadesDrop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_hbb3y")
+
+[node name="ClubsDrop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_wxfw7")
+
+[node name="DiamondsDrop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_7l730")
+
+[node name="Undo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_nkxx2")

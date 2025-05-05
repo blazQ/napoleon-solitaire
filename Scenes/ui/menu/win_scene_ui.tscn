@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp0ao3g8oaf0h"]
+
+[ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://Style/UI_theme.tres" id="1_aro27"]
+[ext_resource type="Script" uid="uid://cw52ecsl550bg" path="res://Scenes/ui/menu/win_scene_ui.gd" id="2_kcsmg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aro27"]
+bg_color = Color(0.0705882, 0.188235, 0.0901961, 0.913725)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="WinSceneUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_aro27")
+script = ExtResource("2_kcsmg")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelButtons" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.5
+offset_top = -93.0
+offset_right = 171.5
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_aro27")
+theme_override_styles/panel = SubResource("StyleBoxFlat_aro27")
+
+[node name="Container" type="Control" parent="PanelButtons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -71.0
+offset_right = 118.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelButtons/Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.289
+anchor_right = 0.5
+anchor_bottom = 0.289
+offset_left = -93.0
+offset_top = -19.038
+offset_right = 92.0
+offset_bottom = 18.962
+grow_horizontal = 2
+grow_vertical = 2
+text = "You've won!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelButtons/Container"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -46.0
+offset_right = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 22
+
+[node name="Restart" type="Button" parent="PanelButtons/Container/HBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Exit" type="Button" parent="PanelButtons/Container/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="PanelButtons/Container/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelButtons/Container/HBoxContainer/Exit" to="." method="_on_exit_pressed"]

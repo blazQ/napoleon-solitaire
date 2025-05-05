@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://ywpcfgy1ypld"]
+
+[ext_resource type="Theme" uid="uid://c26v7ys8e032m" path="res://Style/UI_theme.tres" id="1_g0wmg"]
+[ext_resource type="Script" uid="uid://l0jc0ba8uu5r" path="res://Scenes/ui/ui.gd" id="2_2246s"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_g0wmg")
+script = ExtResource("2_2246s")
+
+[node name="MenuPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 81.0
+grow_horizontal = 2
+
+[node name="ScoreTime" type="HBoxContainer" parent="MenuPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0138889
+anchor_top = 0.222222
+anchor_right = 0.986111
+anchor_bottom = 0.790123
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ElapsedTimeLabel" type="Label" parent="MenuPanel/ScoreTime"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "00:00:00"
+
+[node name="MoveCount" type="Label" parent="MenuPanel/ScoreTime"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Moves: 0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuPanel/ScoreTime"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 21
+
+[node name="Reshuffle" type="Button" parent="MenuPanel/ScoreTime/HBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "Reshuffle"
+
+[node name="Undo" type="Button" parent="MenuPanel/ScoreTime/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_g0wmg")
+text = "Undo"
+
+[connection signal="pressed" from="MenuPanel/ScoreTime/HBoxContainer/Reshuffle" to="." method="_on_reshuffle_pressed"]
+[connection signal="pressed" from="MenuPanel/ScoreTime/HBoxContainer/Undo" to="." method="_on_undo_pressed"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://62lllsib33mc"]
+
+[ext_resource type="Script" uid="uid://cogs713uwxndj" path="res://Scenes/game/deck_handler.gd" id="1_rwll6"]
+
+[node name="DeckHandler" type="Node3D"]
+script = ExtResource("1_rwll6")

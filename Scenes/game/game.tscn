@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=3 uid="uid://dawu648x4k7co"]
+
+[ext_resource type="Script" uid="uid://cth0jmt58hv11" path="res://Scenes/game/solitaire.gd" id="1_5l446"]
+[ext_resource type="PackedScene" uid="uid://c6ewxol5y80i8" path="res://Assets/card_selector.tscn" id="2_6y3i1"]
+[ext_resource type="PackedScene" uid="uid://d3df0nwsrk5si" path="res://Scenes/field/field.tscn" id="3_meiaf"]
+[ext_resource type="PackedScene" uid="uid://62lllsib33mc" path="res://Scenes/game/deck_handler.tscn" id="4_6y3i1"]
+[ext_resource type="Environment" uid="uid://bw05ivsnsv6ri" path="res://Materials/world_environment.tres" id="4_kw6cb"]
+[ext_resource type="PackedScene" uid="uid://ywpcfgy1ypld" path="res://Scenes/ui/ui.tscn" id="6_hxkax"]
+[ext_resource type="PackedScene" uid="uid://qlnomuyrp2jb" path="res://Scenes/ui/menu/pause_menu.tscn" id="7_7rk1p"]
+[ext_resource type="Script" uid="uid://0hdmloqru1vd" path="res://Scenes/game/camera.gd" id="8_6y3i1"]
+[ext_resource type="PackedScene" uid="uid://dbofxwc4mh58f" path="res://Scenes/audio/audio_manager.tscn" id="9_5l446"]
+[ext_resource type="PackedScene" uid="uid://dp0ao3g8oaf0h" path="res://Scenes/ui/menu/win_scene_ui.tscn" id="10_meiaf"]
+[ext_resource type="PackedScene" uid="uid://ctqferijgw5w8" path="res://Scenes/rules/game_rule_component.tscn" id="11_meiaf"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_xhfwg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxs2u"]
+albedo_color = Color(0.0739636, 0.246661, 0.0429552, 1)
+
+[node name="Solitaire" type="Node3D" groups=["manager"]]
+script = ExtResource("1_5l446")
+
+[node name="CardSelector" parent="." instance=ExtResource("2_6y3i1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98325, 0)
+
+[node name="Field" parent="." node_paths=PackedStringArray("rules") instance=ExtResource("3_meiaf")]
+rules = NodePath("../RuleComponent")
+
+[node name="DeckHandler" parent="." node_paths=PackedStringArray("rules") instance=ExtResource("4_6y3i1")]
+rules = NodePath("../RuleComponent")
+
+[node name="AudioManager" parent="." instance=ExtResource("9_5l446")]
+
+[node name="RuleComponent" parent="." instance=ExtResource("11_meiaf")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_kw6cb")
+camera_attributes = SubResource("CameraAttributesPractical_xhfwg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.452217, 0.891908, 0, -0.891908, 0.452217, 0, 20, 12.5)
+environment = ExtResource("4_kw6cb")
+current = true
+fov = 70.0
+size = 30.0
+near = 0.064
+far = 2000.0
+script = ExtResource("8_6y3i1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.622349, -0.747926, 0.230844, -0.720114, -0.4315, 0.543363, -0.306786, -0.504395, -0.807135, -6.31388, 30.2579, -15.2779)
+light_energy = 0.857
+shadow_enabled = true
+shadow_bias = 0.19
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 519.8
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.000418887, 1, 0, -1, 0.000418887, 0.455505, 8.01022, 1.78825)
+light_energy = 1.074
+light_indirect_energy = 1.342
+light_volumetric_fog_energy = 2.273
+spot_range = 69.6589
+spot_attenuation = -0.14
+spot_angle = 69.2839
+spot_angle_attenuation = 1.93187
+
+[node name="Table" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.0354)
+size = Vector3(150, 0.5, 80.9214)
+material = SubResource("StandardMaterial3D_nxs2u")
+
+[node name="GameUI" parent="." instance=ExtResource("6_hxkax")]
+
+[node name="WinSceneUI" parent="." instance=ExtResource("10_meiaf")]
+visible = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_7rk1p")]
+process_mode = 3
+visible = false
+
+[node name="InputBlocker" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 3
+
+[node name="GameStart" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
+[connection signal="game_over" from="." to="." method="_on_game_over"]
+[connection signal="game_over" from="." to="GameUI" method="_on_solitaire_game_over"]
+[connection signal="game_over" from="." to="GameUI/MenuPanel/ScoreTime/ElapsedTimeLabel" method="_on_solitaire_game_over"]
+[connection signal="shuffling" from="." to="CardSelector" method="_on_solitaire_shuffling"]
+[connection signal="shuffling_end" from="." to="CardSelector" method="_on_solitaire_shuffling_end"]
+[connection signal="ui_update_move_count" from="." to="GameUI" method="_on_solitaire_ui_update_move_count"]
+[connection signal="ui_update_time" from="." to="GameUI" method="_on_solitaire_ui_update_time"]
+[connection signal="timeout" from="GameStart" to="." method="_on_game_start_timeout"]
